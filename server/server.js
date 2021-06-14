@@ -1,16 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const router = express.Router();
 
-const PORT = 3000;
-const app = express();
+const mongoose = require('mongoose');
+const db = "mongodb+srv://awais:qwerasdfzx1@cluster0.idwqs.mongodb.net/event?retryWrites=true&w=majority"
 
-app.use(bodyParser.json());
-
-app.get('/', function(req,res){
-    res.send('Hello from server');
+mongoose.connect(db, err =>{
+if(err){
+    console.error("Error!"+ err);
+}else{
+    console.log("Connected to mongodb");
+}
 });
 
-app.listen(PORT, function(){
-    console.log("server running on localhost: "+ PORT);
+router.get('/', (req, res)=>{
+    res.send("from api route")
+});
 
-})
+module.exports = router;
